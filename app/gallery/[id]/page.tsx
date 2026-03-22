@@ -1,9 +1,12 @@
+import BuyButton from '@/app/components/BuyButton'
 import { paintings } from '@/lib/paintings'
 
-type Props = { params: { id: string } }
+type Props = { params: Promise<{ id: string }> }
 
-export default function PaintingPage({ params }: Props) {
-  const painting = paintings.find(p => p.id === params.id)
+export default async function PaintingPage({ params }: Props) {
+  const { id } = await params
+  const painting = paintings.find(p => p.id === id)
+  
   if (!painting) return <p className="p-20 text-center text-gray-400 text-xl">Painting not found.</p>
 
   return (
@@ -53,20 +56,19 @@ export default function PaintingPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Buy */}
+          {/* Buy Button */}
           {painting.sold ? (
-            <div className="rounded-2xl border-2 border-black p-6 text-center" style={{ backgroundColor: 'var(--pink)' }}>
-              <p className="font-bold text-xl" style={{ fontFamily: 'Fredoka, sans-serif' }}>This painting has been sold 💛</p>
-              <p className="text-gray-600 mt-1">Browse the gallery to find your next favourite piece.</p>
+            <div className="rounded-2xl border-2 border-black p-6 text-center" style={{ backgroundColor: '#f9a8c9' }}>
+              <p className="font-bold text-xl">This painting has been sold 💛</p>
+              <p className="text-gray-600 mt-1">Browse the gallery to find your next favourite.</p>
             </div>
           ) : (
-            <div className="rounded-2xl border-2 border-black p-6" style={{ backgroundColor: 'var(--green-light)' }}>
-              <p className="text-3xl font-bold mb-4" style={{ fontFamily: 'Fredoka, sans-serif' }}>${painting.price}</p>
-              <button className="w-full py-4 rounded-xl border-2 border-black font-bold text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
-                style={{ backgroundColor: 'var(--pink)', fontFamily: 'Fredoka, sans-serif' }}>
-                Add to Cart 🛒
-              </button>
-            </div>
+            <BuyButton
+              paintingId={painting.id}
+              title={painting.title}
+              price={painting.price}
+              image={painting.image}
+            />
           )}
         </div>
       </div>
