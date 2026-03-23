@@ -17,15 +17,15 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center">
           <div style={{ backgroundColor: 'var(--green-light)' }} className="rounded-3xl px-12 py-8 mb-8 shadow-lg border-2 border-black">
             <h1 className="text-6xl md:text-8xl font-bold" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-              Parul's Paintings
+              paintings by parul
             </h1>
           </div>
 
           <p className="text-xl md:text-2xl text-white font-semibold max-w-2xl mb-4 drop-shadow">
-            A 15-year-old collection of abstract artwork for you to admire and purchase.
+            a 15-year-old collection of abstract artwork for you to admire and purchase.
           </p>
           <p className="text-white/80 text-lg mb-10 italic">
-            Every piece is one of a kind — once it's gone, it's gone.
+            every piece is one of a kind — once it's gone, it's gone.
           </p>
 
           <div className="flex gap-4 flex-wrap justify-center">
